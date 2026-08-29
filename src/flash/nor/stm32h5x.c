@@ -127,6 +127,10 @@ static const struct stm32h5x_rev stm32h5e_h5fxx_revs[] = {
 	{ 0x1000, "A" }, { 0x1001, "Z" }, NO_MORE_REVS
 };
 
+static const struct stm32h5x_rev stm32c5xx_revs[] = {
+	{ 0x1001, "Z" }, NO_MORE_REVS
+};
+
 /* Devices identities */
 static const struct stm32h5x_dev_info stm32h5x_dev_info_db[] = {
 	{
@@ -172,6 +176,17 @@ static const struct stm32h5x_dev_info stm32h5x_dev_info_db[] = {
 		.flash_size_addr	= 0x08FFF80C,
 		.wps_group_size		= 4,
 		.wps_mask			= 0xFFFFFFFF,
+	},
+	{
+		.id					= DEVID_STM32C5XX,
+		.name				= "STM32C5xx",
+		.revs				= stm32c5xx_revs,
+		.flags				= F_HAS_DUAL_BANK,
+		.max_flash_size_kb	= 256,
+		.flash_regs_base	= 0x40022000,
+		.flash_size_addr	= 0x08FFF80C,
+		.wps_group_size		= 1,
+		.wps_mask			= 0xFF,
 	},
 
 };
@@ -1231,6 +1246,7 @@ static int stm32h5x_probe(struct flash_bank *bank)
 	case DEVID_STM32H52_H53XX:
 	case DEVID_STM32H56_H57XX:
 	case DEVID_STM32H5E_H5FXX:
+	case DEVID_STM32C5XX:
 		/* Always dual-bank */
 		stm32h5x_bank->dual_bank = true;
 		sector_size_kb = 8;

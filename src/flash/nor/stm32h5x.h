@@ -93,6 +93,7 @@
 #define DEVID_STM32H56_H57XX	0x484    /* RM0481 */
 #define DEVID_STM32H52_H53XX	0x478    /* RM0481 */
 #define DEVID_STM32H5E_H5FXX	0x47A    /* RM0517 */
+#define DEVID_STM32C5XX			0x44F    /* RM0522 */
 
 /* Known Flash base addresses */
 #define STM32_FLASH_BANK_BASE	0x08000000
