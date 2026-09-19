@@ -71,6 +71,7 @@ NOR_DRIVERS = \
 	%D%/stmsmi.c \
 	%D%/stmqspi.c \
 	%D%/stellaris.c \
+	%D%/stm32c5x.c \
 	%D%/stm32f1x.c \
 	%D%/stm32f2x.c \
 	%D%/stm32lx.c \
@@ -103,6 +104,8 @@ NORHEADERS = \
 	%D%/ocl.h \
 	%D%/sfdp.h \
 	%D%/spi.h \
+	%D%/stm32c5x.h \
+	%D%/stm32h5x.h \
 	%D%/stm32l4x.h \
 	%D%/stmqspi.h \
 	%D%/msp432.h
