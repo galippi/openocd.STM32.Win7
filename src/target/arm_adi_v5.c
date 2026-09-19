@@ -1580,6 +1580,8 @@ static const struct dap_part_nums {
 	{ 0x017,  0x343, "TI DAPCTL",                  "", }, /* from OMAP3 memmap */
 	{ 0x017,  0x9af, "MSP432 ROM",                 "(ROM Table)" },
 	{ 0x01f,  0xcd0, "Atmel CPU with DSU",         "(CPU)" },
+	{ 0x020,  0x474, "STM32H50xx",                 "(STM32H5 Microcontroller)", },
+	{ 0x020,  0x484, "STM32H56/H57xx",             "(STM32H5 Microcontroller)", },
 	{ 0x041,  0x1db, "XMC4500 ROM",                "(ROM Table)" },
 	{ 0x041,  0x1df, "XMC4700/4800 ROM",           "(ROM Table)" },
 	{ 0x041,  0x1ed, "XMC1000 ROM",                "(ROM Table)" },
@@ -1597,8 +1599,6 @@ static const struct dap_part_nums {
 	{ 0x575,  0x132, "STAR SCS",                   "(System Control Space)", },
 	{ 0x575,  0x4d2, "Cortex-M52 ROM",             "(ROM Table)", },
 	{ 0x575,  0xd24, "Cortex-M52 Debug",           "(Debug Unit)", },
-	{ 0x020,  0x484, "STM32H56/H57xx",             "(STM32H5 Microcontroller)", },
-	{ 0x020,  0x474, "STM32H50xx",                 "(STM32H5 Microcontroller)", },
 };
 
 static const struct dap_part_nums *pidr_to_part_num(unsigned int designer_id, unsigned int part_num)
