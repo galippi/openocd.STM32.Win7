@@ -1580,6 +1580,9 @@ static const struct dap_part_nums {
 	{ 0x017,  0x343, "TI DAPCTL",                  "", }, /* from OMAP3 memmap */
 	{ 0x017,  0x9af, "MSP432 ROM",                 "(ROM Table)" },
 	{ 0x01f,  0xcd0, "Atmel CPU with DSU",         "(CPU)" },
+	{ 0x020,  0x44E, "STM32C5xx",                  "(STM32C5 Microcontroller 512kB Flash)", },
+	{ 0x020,  0x44F, "STM32C5xx",                  "(STM32C5 Microcontroller <=256kB Flash)", },
+	{ 0x020,  0x45A, "STM32C5xx",                  "(STM32C5 Microcontroller >=1MB Flash)", },
 	{ 0x020,  0x474, "STM32H50xx",                 "(STM32H5 Microcontroller)", },
 	{ 0x020,  0x484, "STM32H56/H57xx",             "(STM32H5 Microcontroller)", },
 	{ 0x041,  0x1db, "XMC4500 ROM",                "(ROM Table)" },
