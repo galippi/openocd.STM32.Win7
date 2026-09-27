@@ -127,8 +127,12 @@ static const struct stm32h5x_rev stm32h5e_h5fxx_revs[] = {
 	{ 0x1000, "A" }, { 0x1001, "Z" }, NO_MORE_REVS
 };
 
-static const struct stm32h5x_rev stm32c5xx_revs[] = {
+static const struct stm32h5x_rev stm32c54x_revs[] = {
 	{ 0x1001, "Z" }, NO_MORE_REVS
+};
+
+static const struct stm32h5x_rev stm32c56x_revs[] = {
+	{ 0x1003, "Y" }, NO_MORE_REVS
 };
 
 /* Devices identities */
@@ -178,9 +182,9 @@ static const struct stm32h5x_dev_info stm32h5x_dev_info_db[] = {
 		.wps_mask			= 0xFFFFFFFF,
 	},
 	{
-		.id					= DEVID_STM32C5XX,
-		.name				= "STM32C5xx",
-		.revs				= stm32c5xx_revs,
+		.id					= DEVID_STM32C54X,
+		.name				= "STM32C54x",
+		.revs				= stm32c54x_revs,
 		.flags				= F_HAS_DUAL_BANK,
 		.max_flash_size_kb	= 256,
 		.flash_regs_base	= 0x40022000,
@@ -188,7 +192,28 @@ static const struct stm32h5x_dev_info stm32h5x_dev_info_db[] = {
 		.wps_group_size		= 1,
 		.wps_mask			= 0xFF,
 	},
-
+	{
+		.id					= DEVID_STM32C56X,
+		.name				= "STM32C56x",
+		.revs				= stm32c56x_revs,
+		.flags				= F_HAS_DUAL_BANK,
+		.max_flash_size_kb	= 512,
+		.flash_regs_base	= 0x40022000,
+		.flash_size_addr	= 0x08FFF80C,
+		.wps_group_size		= 1,
+		.wps_mask			= 0xFF,
+	},
+	{
+		.id					= DEVID_STM32C5AX,
+		.name				= "STM32C5ax",
+		.revs				= stm32c56x_revs,
+		.flags				= F_HAS_DUAL_BANK,
+		.max_flash_size_kb	= 1024,
+		.flash_regs_base	= 0x40022000,
+		.flash_size_addr	= 0x08FFF80C,
+		.wps_group_size		= 1,
+		.wps_mask			= 0xFF,
+	},
 };
 
 /* Register maps*/
@@ -1155,8 +1180,8 @@ static int stm32h5x_probe(struct flash_bank *bank)
 	}
 
 	if (!stm32h5x_bank->dev_info) {
-		LOG_WARNING("Cannot identify target as an %s family device.",
-				supported_devices_desc);
+		LOG_WARNING("Cannot identify target as an %s family device (0x%03X).",
+				supported_devices_desc, device_id);
 
 		return ERROR_FAIL;
 	}
@@ -1206,7 +1231,7 @@ static int stm32h5x_probe(struct flash_bank *bank)
 			stm32h5x_bank->pstate, stm32h5x_product_state_str(stm32h5x_bank->pstate));
 
 	if (bank->base != STM32_FLASH_BANK_BASE && bank->base != STM32_FLASH_S_BANK_BASE) {
-		LOG_ERROR("invalid bank base address");
+		LOG_ERROR("invalid bank base address 0x%08X", (unsigned)bank->base);
 		return ERROR_FAIL;
 	}
 
@@ -1246,7 +1271,9 @@ static int stm32h5x_probe(struct flash_bank *bank)
 	case DEVID_STM32H52_H53XX:
 	case DEVID_STM32H56_H57XX:
 	case DEVID_STM32H5E_H5FXX:
-	case DEVID_STM32C5XX:
+	case DEVID_STM32C54X:
+	case DEVID_STM32C56X:
+	case DEVID_STM32C5AX:
 		/* Always dual-bank */
 		stm32h5x_bank->dual_bank = true;
 		sector_size_kb = 8;
